@@ -10,6 +10,15 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
+import os
+from dotenv import load_dotenv
+
+load_dotenv("E:/Python/EnvironmentVariables/.env")
+USER_NAME = os.getenv("MyUsername")
+API_KEY = os.getenv("MyAPIKey_MyOtherProject")
+debug = bool(os.getenv("DEBUG"))
+email_port = int(os.getenv("email_port"))
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
