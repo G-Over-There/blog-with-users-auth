@@ -9,16 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
-from functools import wraps
 import os
-from dotenv import load_dotenv
-
-load_dotenv("E:/Python/EnvironmentVariables/.env")
-USER_NAME = os.getenv("MyUsername")
-API_KEY = os.getenv("MyAPIKey_MyOtherProject")
-debug = bool(os.getenv("DEBUG"))
-email_port = int(os.getenv("email_port"))
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -28,7 +19,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Base = declarative_base()
